@@ -11,13 +11,19 @@ AppBar buildAppBar(BuildContext context) {
                 'assets/images/icon.png',
                 height: 50,
               ),
-              SizedBox(width: 10,),
+              SizedBox(
+                width: 10,
+              ),
               Text("String Tools"),
             ],
           ),
         ),
         Row(
-          children: [NavButton(context, '/collate', 'Collate Text'), NavButton(context, '/', 'Home')],
+          children: [
+            NavButton(context, '/split-to-lines', 'Split to lines'),
+            NavButton(context, '/collate', 'Collate Text'),
+            NavButton(context, '/', 'Home'),
+          ],
         )
       ],
     ),
@@ -34,16 +40,19 @@ class NavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var currentRoute = ModalRoute.of(context)!.settings.name;
-    return TextButton(
-      onPressed: () {
-        Navigator.pushNamed(context, route);
-      },
-      child: Text(
-        buttonText,
-        style: TextStyle(
-          color: Colors.white,
-          decoration: (currentRoute == route) ? TextDecoration.underline : TextDecoration.none,
-          fontWeight: (currentRoute == route) ? FontWeight.bold : FontWeight.normal,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: TextButton(
+        onPressed: () {
+          Navigator.pushNamed(context, route);
+        },
+        child: Text(
+          buttonText,
+          style: TextStyle(
+            color: Colors.white,
+            decoration: (currentRoute == route) ? TextDecoration.underline : TextDecoration.none,
+            fontWeight: (currentRoute == route) ? FontWeight.bold : FontWeight.normal,
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:stringtools/homepage.dart';
+import 'package:stringtools/splitToLines.dart';
 
 import 'collate.dart';
 
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
-        '/collate': (context) => CollatePage()
+        '/collate': (context) => CollatePage(),
+        '/split-to-lines': (context) => SplitToLinesPage()
       },
     );
   }
