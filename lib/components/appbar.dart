@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-AppBar buildAppBar(BuildContext context) {
+AppBar buildAppBar(BuildContext context, {String? pageName}) {
   return AppBar(
     title: Row(
       children: [
@@ -14,18 +14,13 @@ AppBar buildAppBar(BuildContext context) {
               SizedBox(
                 width: 10,
               ),
-              Text("String Tools"),
+              Text(pageName ?? "String Tools"),
             ],
           ),
         ),
-        // CustomizedAppBarLinks(context, [
-        //   NavButton(context, '/split-to-lines', 'Split to lines'),
-        //   NavButton(context, '/collate', 'Collate Text'),
-        //   NavButton(context, '/', 'Home'),
-        // ])
         CustomizedAppBarLinks(
           context,
-          {'/split-to-lines': 'Split to lines', '/collate': 'Collate Text', '/': 'Home'},
+          {'/split-to-lines': 'Split to lines', '/collate': 'Collate Text', '/': 'Home', '/list-tools': 'List Tools'},
         ),
       ],
     ),
