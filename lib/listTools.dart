@@ -12,6 +12,7 @@ class _ListToolsPageState extends State<ListToolsPage> {
   final inputATextController = TextEditingController();
   final inputBTextController = TextEditingController();
   final outputTextController = TextEditingController();
+  var listSizes = [0, 0, 0];
 
   aMinusB() {
     final inputTextA = inputATextController.text;
@@ -44,12 +45,46 @@ class _ListToolsPageState extends State<ListToolsPage> {
     outputTextController.text = input.join("\n");
   }
 
+  updateListSizes(int listNo) {
+    setState(() {
+      switch (listNo) {
+        case 0:
+          listSizes[0] = calculateListLength(inputATextController.text);
+          break;
+        case 1:
+          listSizes[1] = calculateListLength(inputBTextController.text);
+          break;
+        case 2:
+          listSizes[2] = calculateListLength(outputTextController.text);
+          break;
+      }
+    });
+  }
+
+  int calculateListLength(String s) {
+    return s.split("\n").length;
+  }
+
   @override
   void dispose() {
     inputATextController.dispose();
     inputBTextController.dispose();
     outputTextController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    inputATextController.addListener(() {
+      updateListSizes(0);
+    });
+    inputBTextController.addListener(() {
+      updateListSizes(1);
+    });
+    outputTextController.addListener(() {
+      updateListSizes(2);
+    });
+    super.initState();
   }
 
   @override
@@ -84,17 +119,33 @@ class _ListToolsPageState extends State<ListToolsPage> {
                     ),
                     child: FractionallySizedBox(
                       widthFactor: 0.4,
-                      child: TextField(
-                        controller: inputATextController,
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          hintText: "List A, Eg:\n1\n2\n3",
-                          border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                        ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "[Size: ${listSizes[0]}]",
+                              ),
+                            ],
+                          ),
+                          TextField(
+                            controller: inputATextController,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                              hintText: "List A, Eg:\n1\n2\n3",
+                              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 1.0)),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   ConstrainedBox(
                     constraints: BoxConstraints(
                       maxHeight: 200,
@@ -102,13 +153,27 @@ class _ListToolsPageState extends State<ListToolsPage> {
                     ),
                     child: FractionallySizedBox(
                       widthFactor: 0.4,
-                      child: TextField(
-                        controller: inputBTextController,
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          hintText: "List B, Eg:\n1\n2\n3",
-                          border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 1.0)),
-                        ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "[Size: ${listSizes[1]}]",
+                              ),
+                            ],
+                          ),
+                          TextField(
+                            controller: inputBTextController,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                              hintText: "List B, Eg:\n1\n2\n3",
+                              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 1.0)),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -175,6 +240,15 @@ class _ListToolsPageState extends State<ListToolsPage> {
                       ),
                       style: TextButton.styleFrom(primary: Colors.white, onSurface: Colors.grey, backgroundColor: Colors.teal),
                     ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "[Size: ${listSizes[2]}]",
                   ),
                 ],
               ),
