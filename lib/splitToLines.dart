@@ -36,6 +36,7 @@ class _SplitToLinesPageState extends State<SplitToLinesPage> {
 
     return Scaffold(
       appBar: buildAppBar(context),
+      drawer: customDrawer(height > width),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: putPadding ? (width * 0.2) : 40.0),

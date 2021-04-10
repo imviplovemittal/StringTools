@@ -5,6 +5,7 @@ import 'package:stringtools/listTools.dart';
 import 'package:stringtools/splitToLines.dart';
 
 import 'collate.dart';
+import 'prefix_suffix.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => HomePage(),
         '/collate': (context) => CollatePage(),
         '/split-to-lines': (context) => SplitToLinesPage(),
-        '/list-tools': (context) => ListToolsPage()
+        '/list-tools': (context) => ListToolsPage(),
+        '/prefix-suffix': (context) => PrefixSuffixPage()
       },
     );
   }
