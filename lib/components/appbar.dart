@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stringtools/utils.dart';
 
 AppBar buildAppBar(BuildContext context, {String? pageName}) {
   return AppBar(
@@ -20,7 +21,7 @@ AppBar buildAppBar(BuildContext context, {String? pageName}) {
         ),
         CustomizedAppBarLinks(
           context,
-          {'/split-to-lines': 'Split to lines', '/collate': 'Collate Text', '/': 'Home', '/list-tools': 'List Tools'},
+          navBarLinks,
         ),
       ],
     ),
@@ -51,7 +52,6 @@ class _CustomizedAppBarLinksState extends State<CustomizedAppBarLinks> {
   }
 
   getList() {
-    print(widget.buttons);
     return Container(
         height: widget.buttons.length * buttonSize!.height,
         decoration: BoxDecoration(
@@ -102,6 +102,7 @@ class _CustomizedAppBarLinksState extends State<CustomizedAppBarLinks> {
     double height = MediaQuery.of(context).size.height;
 
     if (height > width) {
+      return SizedBox();
       return Container(
         key: key,
         decoration: BoxDecoration(
@@ -155,4 +156,22 @@ class NavButton extends StatelessWidget {
       ),
     );
   }
+}
+
+Drawer? customDrawer(bool mobileView) {
+  return mobileView ? Drawer(
+    child: ListView.builder(
+      padding: EdgeInsets.zero,
+      itemCount: navBarLinks.keys.length,
+      itemBuilder: (context, index) {
+        var key = navBarLinks.keys.toList()[index];
+        return ListTile(
+          title: Text(navBarLinks[key]!),
+          onTap: () {
+            Navigator.pushNamed(context, key);
+          },
+        );
+      },
+    ),
+  ) : null;
 }

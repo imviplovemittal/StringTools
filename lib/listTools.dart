@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stringtools/utils.dart';
 
 import 'components/appbar.dart';
 import 'logic/listToolsLogic.dart';
@@ -95,6 +96,7 @@ class _ListToolsPageState extends State<ListToolsPage> {
 
     return Scaffold(
       appBar: buildAppBar(context, pageName: "List Tools"),
+      drawer: customDrawer(height > width),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: putPadding ? (width * 0.2) : 40.0),
@@ -131,12 +133,17 @@ class _ListToolsPageState extends State<ListToolsPage> {
                               ),
                             ],
                           ),
-                          TextField(
-                            controller: inputATextController,
-                            maxLines: null,
-                            decoration: InputDecoration(
-                              hintText: "List A, Eg:\n1\n2\n3",
-                              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 1.0)),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxHeight: 180,
+                            ),
+                            child: TextField(
+                              controller: inputATextController,
+                              maxLines: null,
+                              decoration: InputDecoration(
+                                hintText: "List A, Eg:\n1\n2\n3",
+                                border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 1.0)),
+                              ),
                             ),
                           ),
                         ],
@@ -148,7 +155,7 @@ class _ListToolsPageState extends State<ListToolsPage> {
                   ),
                   ConstrainedBox(
                     constraints: BoxConstraints(
-                      maxHeight: 200,
+                      maxHeight: 180,
                       maxWidth: putPadding ? width * 0.7 : width,
                     ),
                     child: FractionallySizedBox(
@@ -165,12 +172,17 @@ class _ListToolsPageState extends State<ListToolsPage> {
                               ),
                             ],
                           ),
-                          TextField(
-                            controller: inputBTextController,
-                            maxLines: null,
-                            decoration: InputDecoration(
-                              hintText: "List B, Eg:\n1\n2\n3",
-                              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 1.0)),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxHeight: 200,
+                            ),
+                            child: TextField(
+                              controller: inputBTextController,
+                              maxLines: null,
+                              decoration: InputDecoration(
+                                hintText: "List B, Eg:\n1\n2\n3",
+                                border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 1.0)),
+                              ),
                             ),
                           ),
                         ],
